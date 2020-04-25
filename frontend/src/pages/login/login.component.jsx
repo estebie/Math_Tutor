@@ -3,6 +3,7 @@ import React from 'react';
 import './login.styles.scss';
 import logo from '../../assets/Math_Coach_Logo_With_Ops.png';
 import SignIn from '../../components/sign-in/sign-in.component';
+import SignUp from '../../components/sign-up/sign-up.component';
 
 const LoginPage = () => (
     <div className='login-form-wrapper'>
@@ -11,7 +12,7 @@ const LoginPage = () => (
                 <img src={logo} alt="Logo" />
             </div>
             <div className='form-container'>
-            <SignIn></SignIn> 
+            <SignUp></SignUp>
             </div>
         </div>
     </div>
