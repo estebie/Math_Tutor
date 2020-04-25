@@ -1,4 +1,4 @@
-.login-container {
+.login-form-wrapper {
     background: #31B7D7;
     background: -webkit-linear-gradient(-110deg, #08F7FE, #09FBD3, #F5D300);
     background: linear-gradient(110deg, #009dff, #cdf8f9, #008de5);
@@ -13,7 +13,7 @@
     padding: 15px;
     width: 100%;
     min-height: 100vh;
-    .form-container {
+    .login-form-container {
         width: 960px;
         background: #fff;
         border-radius: 10px;
@@ -25,11 +25,14 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: 95px 130px 33px 95px;
+        padding: 95px 50px 33px 50px;
         .logo-container {
             img {
                 width: 400px;
             }
+        }
+        .form-container {
+            width: 350px;
         }
     }
 }
