@@ -14,8 +14,6 @@ import {
 
 const SignIn = () => (
    <div>
-    <h3 className="text-center">Login</h3>
-    <br></br>
     <Form>
         <FormGroup row>
             <InputGroup>

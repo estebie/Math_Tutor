@@ -12,8 +12,6 @@ import {
 
 const SignUp = () => (
    <div>
-    <h3 className="text-center">Sign Up</h3>
-    <br></br>
     <Form>
         <FormGroup row>
             <InputGroup>
