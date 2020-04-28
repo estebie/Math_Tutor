@@ -16,4 +16,4 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     dob = models.DateField()
-    is_organizer = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
