@@ -18,7 +18,7 @@ const SignUp = () => (
                 <InputGroupAddon addonType="prepend">
                     <InputGroupText>Email: </InputGroupText>
                     </InputGroupAddon>
-                <Input type="email" name="email" id="email"/>
+                <Input type="email" name="email" id="login_email"/>
             </InputGroup>
         </FormGroup>
         <FormGroup row>
@@ -26,7 +26,7 @@ const SignUp = () => (
                 <InputGroupAddon addonType="prepend">
                     <InputGroupText>Password: </InputGroupText>
                     </InputGroupAddon>
-                <Input type="password" name="password" id="password"/>
+                <Input type="password" name="password" id="login_password"/>
             </InputGroup>
         </FormGroup>
         <FormGroup row>
