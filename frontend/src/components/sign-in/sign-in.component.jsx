@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {emailSignInStart} from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 
 import { 
     Button,
@@ -36,12 +38,12 @@ const SignIn = ({emailSignInStart}) => {
                 <FormGroup row>
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">
-                            <InputGroupText>Email: </InputGroupText>
+                            <InputGroupText><FontAwesomeIcon icon={faUser} /></InputGroupText>
                             </InputGroupAddon>
                         <Input 
                             type="email" 
-                            name="email" 
-                            id="email"
+                            name="email"
+                            placeholder="Email"
                             onChange={handleChange}
                         />
                     </InputGroup>
@@ -49,12 +51,12 @@ const SignIn = ({emailSignInStart}) => {
                 <FormGroup row>
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">
-                            <InputGroupText>Password: </InputGroupText>
+                            <InputGroupText><FontAwesomeIcon icon={faKey} /></InputGroupText>
                             </InputGroupAddon>
                         <Input 
                             type="password" 
-                            name="password" 
-                            id="password"
+                            name="password"
+                            placeholder="Password"
                             onChange={handleChange}
                         />
                     </InputGroup>

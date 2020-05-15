@@ -25,7 +25,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: 95px 50px 33px 50px;
+        padding: 125px 50px 33px 50px;
         .logo-container {
             img {
                 width: 400px;
@@ -33,6 +33,7 @@
         }
         .form-container {
             width: 350px;
+            height: 450px;
             .tab-container {
                 padding: 80px 20px 0px 20px;
             }

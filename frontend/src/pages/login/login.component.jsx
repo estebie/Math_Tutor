@@ -52,10 +52,9 @@ const LoginPage = () => {
                             <SignIn></SignIn>
                         </TabPane>
                         <TabPane tabId="2">
-                            {/* <SignUp></SignUp> */}
+                            <SignUp></SignUp>
                         </TabPane>
                     </TabContent>
-                {/* <SignUp></SignUp> */}
                 </div>
             </div>
         </div>
