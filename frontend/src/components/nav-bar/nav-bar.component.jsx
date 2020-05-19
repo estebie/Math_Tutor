@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import { 
-    Collapse,
+    Container,
     Navbar,
     NavbarBrand,
-    NavbarToggler , 
     NavItem,
     Nav,  
     NavLink, 
@@ -17,18 +16,20 @@ const NavigationBar = () => {
     return (
         <div>
             <Navbar color="primary" dark expand="md">
-                <NavbarBrand href="/">Math Tutor</NavbarBrand>
-                <Nav navbar className="ml-auto">
-                    <NavItem className="mx-2">
-                        <NavLink href="/components/">Shop</NavLink>
-                    </NavItem>
-                    <NavItem className="mx-2" active>
-                        <NavLink href="/components/">Lessons</NavLink>
-                    </NavItem>
-                    <NavItem className="mx-2">
-                        <NavLink href="">Logout</NavLink>
-                    </NavItem>
-                </Nav>
+                <Container>
+                    <NavbarBrand href="/">Math Tutor</NavbarBrand>
+                    <Nav navbar className="ml-auto">
+                        <NavItem className="mx-2">
+                            <NavLink href="/components/">Shop</NavLink>
+                        </NavItem>
+                        <NavItem className="mx-2" active>
+                            <NavLink href="/components/">Lessons</NavLink>
+                        </NavItem>
+                        <NavItem className="mx-2">
+                            <NavLink href="">Logout</NavLink>
+                        </NavItem>
+                    </Nav>
+                    </Container>
             </Navbar>
         </div>
     )
