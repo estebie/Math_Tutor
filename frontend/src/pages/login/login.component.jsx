@@ -23,7 +23,6 @@ const LoginPage = () => {
 
     return (
         <div className='login-form-wrapper'>
-            
             <div className='login-form-container'>
                 <div className='logo-container'>
                     <img src={logo} alt="Logo" />
