@@ -1,13 +1,16 @@
 import React from 'react';
 import NavigationBar from '../nav-bar/nav-bar.component';
+import { Redirect } from 'react-router-dom';
 
 const IsAuthenticated = WrappedComponent => ({user}) => {
-    console.log(user);    
-    return (    
-        <div>
-            <NavigationBar/>
-            <WrappedComponent/> 
-        </div>
+    let content;
+    if (user){
+        content = <div><NavigationBar/><WrappedComponent/></div>;
+    } else {
+        content = <div><Redirect to="/login"/></div>;
+    }
+    return (
+        content
     )
 }
 
