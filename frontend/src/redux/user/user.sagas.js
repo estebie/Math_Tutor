@@ -1,6 +1,6 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import userActionTypes from './user.types';
-import { signInSuccess, signInFailure, signOutFailure, signOutSuccess, signUpSuccess, signUpFailure } from './user.actions';
+import { signInSuccess, signInFailure, signUpSuccess, signUpFailure } from './user.actions';
 
 export function* getAuthentication(email, password) {
     try {

@@ -1,9 +1,8 @@
 import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import './App.css';
 
 import LoginPage from './pages/login/login.component.jsx';
-import NavigationBar from './components/nav-bar/nav-bar.component';
 import HomePage from './pages/homepage/homepage.component';
 
 function App() {

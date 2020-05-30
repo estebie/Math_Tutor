@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { 
     Container,
     Navbar,
@@ -8,11 +8,10 @@ import {
     NavLink, 
  } from 'reactstrap';
 
-const NavigationBar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+import {signOutSuccess} from '../../redux/user/user.actions';
+import { connect } from 'react-redux';
 
-    const toggle = () => setIsOpen(!isOpen);
-
+const NavigationBar = ({signOutSuccess}) => {
     return (
         <div>
             <Navbar color="primary" dark expand="md">
@@ -26,7 +25,7 @@ const NavigationBar = () => {
                             <NavLink href="/components/">Lessons</NavLink>
                         </NavItem>
                         <NavItem className="mx-2">
-                            <NavLink href="">Logout</NavLink>
+                            <NavLink href="#" onClick={signOutSuccess}>Logout</NavLink>
                         </NavItem>
                     </Nav>
                     </Container>
@@ -35,5 +34,8 @@ const NavigationBar = () => {
     )
 }
 
+const mapDispatchToProps = dispatch => ({
+    signOutSuccess: () => dispatch(signOutSuccess()),
+})
 
-export default NavigationBar;
+export default connect(null,mapDispatchToProps)(NavigationBar);
