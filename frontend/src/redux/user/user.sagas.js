@@ -18,7 +18,7 @@ export function* getAuthentication(email, password) {
                 throw error;
             });
         if (response.non_field_errors === undefined) {
-            yield put(signInSuccess({ response }))
+            yield put(signInSuccess(response))
         } else {
             throw response;
         }
