@@ -10,6 +10,7 @@ const userActionTypes = {
     SIGN_UP_START: 'SIGN_UP_START',
     SIGN_UP_SUCCESS: 'SIGN_UP_SUCCESS',
     SIGN_UP_FAILURE: 'SIGN_UP_FAILURE',
+    CLEAR_USER_ERROR: 'CLEAR_USER_ERROR'
 }
 
 export default userActionTypes;

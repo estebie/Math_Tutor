@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
-import {emailSignInStart} from '../../redux/user/user.actions';
+import {emailSignInStart, clearUserError} from '../../redux/user/user.actions';
+import userActionTypes from "../../redux/user/user.types";
+import { selectUserError } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
+import {createStructuredSelector} from 'reselect';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 
 import { 
+    Alert,
     Button,
     Col,
     Form, 
@@ -13,17 +17,20 @@ import {
     InputGroupText, 
     InputGroupAddon, 
     Input,
-    Row
+    Row,
+    Spinner
  } from 'reactstrap';
 
-const SignIn = ({emailSignInStart}) => {
+const SignIn = ({ emailSignInStart, error, clearUserError }) => {
     const [userCredentials, setCredentials] = useState({email:'', password:''});
-    const{email, password} = userCredentials;
-
+    const [visible, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const {email, password} = userCredentials;
     const handleSubmit = async event => {
         event.preventDefault();
         console.log('submitting');
         console.log(email + password);
+        setLoading(true);
         emailSignInStart(email, password);
     }
 
@@ -32,9 +39,22 @@ const SignIn = ({emailSignInStart}) => {
         setCredentials({...userCredentials, [name]: value});
     }
 
+    const onDismiss = () => {
+        clearUserError();
+        setVisible(false);
+    }
+    
+    if (userActionTypes.SIGN_IN_FAILURE === error && visible === false) {
+        setLoading(false);
+        setVisible(true);
+    }
+
     return (   
         <div>
             <Form onSubmit={handleSubmit}>
+                <Alert color="danger" isOpen={visible} toggle={onDismiss}>
+                    Login failed. Please try again.
+                </Alert>
                 <FormGroup row>
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">
@@ -66,16 +86,33 @@ const SignIn = ({emailSignInStart}) => {
                         <p className="text-center text-md-right">Forgot your password?</p>
                     </Col>
                 </Row>
-                <Button type='submit' outline color="primary" size="sm" block>Login</Button>
-                <Button outline color="danger" size="sm" block>Login with Google</Button>
+                { loading ?                
+                    <div>
+                        <Spinner type="grow" color="primary"/>
+                        <Spinner type="grow" color="primary"/>
+                        <Spinner type="grow" color="primary"/>
+                        <Spinner type="grow" color="primary"/>
+                        <Spinner type="grow" color="primary"/>
+                        <Spinner type="grow" color="primary"/>
+                    </div> 
+                    : 
+                    <div>
+                        <Button type='submit' outline color="primary" size="sm" block>Login</Button>
+                        <Button outline color="danger" size="sm" block>Login with Google</Button>
+                    </div>
+                }
             </Form>
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => ({
-    emailSignInStart: (email, password) => dispatch(emailSignInStart(email, password))
+    emailSignInStart: (email, password) => dispatch(emailSignInStart(email, password)),
+    clearUserError: () => dispatch(clearUserError())
 })
 
+const mapStateToProps =  createStructuredSelector({
+    error: selectUserError
+});
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

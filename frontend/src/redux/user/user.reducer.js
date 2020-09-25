@@ -1,8 +1,13 @@
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
+import { persistReducer } from "redux-persist";
+import storage from 'redux-persist/lib/storage';
 import userActionTypes from "./user.types"
 
 const INITIAL_STATE = {
-    token: null,
+    userToken: null,
     currentUser: null,
+    error: null,
+    error_page: null,
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -22,6 +27,17 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 error: null
             }
         case userActionTypes.SIGN_IN_FAILURE:
+            return {
+                ...state,
+                error_page: userActionTypes.SIGN_IN_FAILURE,
+                error: action.payload
+            }
+        case userActionTypes.CLEAR_USER_ERROR:
+            return {
+                ...state,
+                error_page: null,
+                error: null
+            }
         case userActionTypes.SiGN_OUT_FAILURE:
         case userActionTypes.SIGN_UP_FAILURE:
             return {
@@ -33,4 +49,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
     }
 }
 
-export default userReducer;
+const userConfig = {
+    key: 'user',
+    storage,
+    blacklist: ['error', 'error_page', 'token'],
+    stateReconciler: hardSet,
+}
+
+export default persistReducer(userConfig, userReducer);

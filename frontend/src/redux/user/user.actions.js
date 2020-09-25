@@ -38,3 +38,7 @@ export const signUpFailure = (error) => ({
     type: userActionTypes.SIGN_UP_FAILURE,
     payload: error
 });
+
+export const clearUserError = () => ({
+    type: userActionTypes.CLEAR_USER_ERROR
+});
