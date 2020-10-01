@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {emailSignInStart, clearUserError} from '../../redux/user/user.actions';
+import { emailSignInStart, clearUserError } from '../../redux/user/user.actions';
 import userActionTypes from "../../redux/user/user.types";
 import { selectUserError } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';

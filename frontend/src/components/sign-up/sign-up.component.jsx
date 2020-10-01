@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
-import {signUpStart} from '../../redux/user/user.actions';
+import { signUpStart, clearUserError} from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faKey, faBirthdayCake } from '@fortawesome/free-solid-svg-icons'
+import { createStructuredSelector } from 'reselect';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faKey, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
+import { selectUserError } from '../../redux/user/user.selector';
+import userActionTypes from "../../redux/user/user.types";
 
 import { 
+    Alert,
     Button,
     Form, 
     FormGroup,
@@ -12,9 +16,10 @@ import {
     InputGroupText, 
     InputGroupAddon, 
     Input,
+    Spinner,
  } from 'reactstrap';
 
-const SignUp = ({signUpStart}) => {
+const SignUp = ({ signUpStart, error, clearUserError  }) => {
 
     const [userCredentials, setCredentials] 
         = useState({
@@ -25,6 +30,8 @@ const SignUp = ({signUpStart}) => {
             first_name:'',
             last_name:''
         });
+    const [visible, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [isPasswordValidated, setPasswordValidated] = useState(false);
 
     const{email, password, confirm_password, dob, first_name, last_name} = userCredentials;
@@ -41,6 +48,7 @@ const SignUp = ({signUpStart}) => {
         }
 
         if (password === confirm_password) {
+            setLoading(true);
             signUpStart(form);
         }
     }
@@ -50,9 +58,21 @@ const SignUp = ({signUpStart}) => {
         setCredentials({...userCredentials, [name]: value});
     }
 
+    const onDismiss = () => {
+        clearUserError();
+        setVisible(false);
+    }
+    
+    if (userActionTypes.SIGN_UP_FAILURE === error && visible === false) {
+        setLoading(false);
+        setVisible(true);
+    }
     return (
         <div>
             <Form onSubmit={handleSubmit}>
+                <Alert color="danger" isOpen={visible} toggle={onDismiss}>
+                    Login failed. Please try again.
+                </Alert>
                 <FormGroup row>
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">
@@ -138,14 +158,30 @@ const SignUp = ({signUpStart}) => {
                         />
                     </InputGroup>
                 </FormGroup>
-                <Button outline color="success" size="sm" block>Sign Up</Button>
+                { loading ?                
+                    <div>
+                        <Spinner type="grow" color="success"/>
+                        <Spinner type="grow" color="success"/>
+                        <Spinner type="grow" color="success"/>
+                        <Spinner type="grow" color="success"/>
+                        <Spinner type="grow" color="success"/>
+                        <Spinner type="grow" color="success"/>
+                    </div> 
+                    : 
+                    <Button outline color="success" size="sm" block>Sign Up</Button>
+                }
             </Form>
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => ({
-    signUpStart: (form) => dispatch(signUpStart(form))
+    signUpStart: (form) => dispatch(signUpStart(form)),
+    clearUserError: () => dispatch(clearUserError())
 })
 
-export default connect(null, mapDispatchToProps)(SignUp);
+const mapStateToProps =  createStructuredSelector({
+    error: selectUserError
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

@@ -27,9 +27,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 error: null
             }
         case userActionTypes.SIGN_IN_FAILURE:
+        case userActionTypes.SIGN_UP_FAILURE:
             return {
                 ...state,
-                error_page: userActionTypes.SIGN_IN_FAILURE,
+                error_page: action.type,
                 error: action.payload
             }
         case userActionTypes.CLEAR_USER_ERROR:
@@ -39,7 +40,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 error: null
             }
         case userActionTypes.SiGN_OUT_FAILURE:
-        case userActionTypes.SIGN_UP_FAILURE:
             return {
                 ...state,
                 error: action.payload
