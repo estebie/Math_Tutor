@@ -15,7 +15,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case userActionTypes.SIGN_IN_SUCCESS:
             return {
                 ...state,
-                token: action.payload.token,
+                userToken: action.payload.token,
                 currentUser: action.payload.user,
                 error: null
             }

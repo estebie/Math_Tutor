@@ -71,7 +71,7 @@ const SignUp = ({ signUpStart, error, clearUserError  }) => {
         <div>
             <Form onSubmit={handleSubmit}>
                 <Alert color="danger" isOpen={visible} toggle={onDismiss}>
-                    Login failed. Please try again.
+                    Sign-up failed. Please try again.
                 </Alert>
                 <FormGroup row>
                     <InputGroup>
