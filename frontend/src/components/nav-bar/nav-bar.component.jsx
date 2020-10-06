@@ -7,7 +7,8 @@ import {
     Nav,  
     NavLink, 
  } from 'reactstrap';
-
+ import { NavLink as RRNavLink } from 'react-router-dom';
+ 
 import {signOutSuccess} from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 
@@ -19,10 +20,13 @@ const NavigationBar = ({signOutSuccess}) => {
                     <NavbarBrand href="/">Math Tutor</NavbarBrand>
                     <Nav navbar className="ml-auto">
                         <NavItem className="mx-2">
-                            <NavLink href="/components/">Shop</NavLink>
+                            <NavLink tag={RRNavLink} exact to="/" activeClassName="active">Home</NavLink>
                         </NavItem>
-                        <NavItem className="mx-2" active>
-                            <NavLink href="/components/">Lessons</NavLink>
+                        <NavItem className="mx-2">
+                            <NavLink tag={RRNavLink} exact to="/shop/" activeClassName="active">Shop</NavLink>
+                        </NavItem>
+                        <NavItem className="mx-2">
+                            <NavLink tag={RRNavLink} exact to="/lesson/" activeClassName="active">Lessons</NavLink>
                         </NavItem>
                         <NavItem className="mx-2">
                             <NavLink href="#" onClick={signOutSuccess}>Logout</NavLink>
