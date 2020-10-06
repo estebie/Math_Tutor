@@ -1,13 +1,26 @@
 import React, {useState} from 'react';
-import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { 
+      Button, 
+      Col,
+      Container,
+      Form, 
+      FormGroup, 
+      Label, 
+      Input,
+      Row
+ } from 'reactstrap';
 import { connect } from 'react-redux';
-import {lessonCreateStart} from '../../redux/lesson/lesson.actions';
+import { lessonCreateStart } from '../../redux/lesson/lesson.actions';
+import { compose } from 'redux';
+import PrivacyContainer from '../../components/privacy-container/privacy-container.component';
+import { Link } from "react-router-dom";
+
 import './lesson_create.styles.scss';
 
 const LessonCreate = ({lessonCreateStart}) => {
       const [lessonParameters, setParameters] = useState({title:'', formula:'', level:''});
       const {title, formula, level} = lessonParameters;
-
+      
       const handleSubmit = async event => {
             event.preventDefault();
             console.log('submitting!');
@@ -28,7 +41,7 @@ const LessonCreate = ({lessonCreateStart}) => {
 
       return (
       <Container>
-            <Form className="text-center text-md-left" onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className='lesson-form'>
                   <FormGroup>
                         <Label for="title">Title</Label>
                         <Input 
@@ -59,7 +72,30 @@ const LessonCreate = ({lessonCreateStart}) => {
                               onChange={handleChange}
                         />
                   </FormGroup>
-                  <Button color="primary" size="sm">Submit</Button>
+                  <Row>
+                        <Col sm={{ size: 3 }}>
+                              <Button 
+                                    color="danger" 
+                                    size="sm"
+                                    block={true}
+                                    tag={Link}
+                                    to="."
+                              >
+                                    Cancel
+                              </Button>
+                        </Col>
+                        <Col sm={{ size: 3, offset: 6 }}>
+                              <Button 
+                                    color="primary" 
+                                    size="sm"
+                                    block={true}
+                                    type='submit'
+                              >
+                                    Submit
+                              </Button>
+                        </Col>
+                  </Row>
+
             </Form>
       </Container>
       )
@@ -70,4 +106,7 @@ const mapDispatchToProps = dispatch => ({
   })
   
   
-export default connect(null, mapDispatchToProps)(LessonCreate);
+export default compose(
+      connect(null, mapDispatchToProps),
+      PrivacyContainer
+)(LessonCreate)

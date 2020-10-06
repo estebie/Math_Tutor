@@ -15,7 +15,6 @@ function App({currentUser}) {
     <div className = "App">
       <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/lesson' component={LessonIndexPage} />
         <Route 
           exact path='/login' 
           render={()=> currentUser ? (
@@ -25,11 +24,16 @@ function App({currentUser}) {
                 )
               } 
           />
-        <Route exact path='/lesson/create' component={LessonCreate}/>
+        {LessonRoutes()}
       </Switch>
     </div>
   );
 }
+
+const LessonRoutes = () => ([
+  <Route exact path='/lesson' component={LessonIndexPage} />,
+  <Route exact path='/lesson/create/' component={LessonCreate} />
+]);
 
 const mapStateToProps =  createStructuredSelector({
   currentUser: selectCurrentUser,
